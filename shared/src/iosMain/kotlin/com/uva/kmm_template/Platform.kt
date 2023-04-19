@@ -1,4 +1,4 @@
-package com.uva.kmmtemplate
+package com.uva.kmm_template
 
 import platform.UIKit.UIDevice
 
