@@ -28,6 +28,7 @@ kotlin {
                 implementation(libs.kotlinx.coroutines.core)
                 implementation(libs.touchlab.kermit)
                 implementation(libs.ktor.client.core)
+                api(libs.koin.core)
             }
         }
         val androidMain by getting {
