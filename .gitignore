@@ -8,3 +8,5 @@ captures
 .cxx
 local.properties
 xcuserdata
+
+/shared/src/commonMain/kotlin/com/uva/kmm_template/data_source/remote/OPEN_AI_API.kt
