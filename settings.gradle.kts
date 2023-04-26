@@ -45,6 +45,9 @@ dependencyResolutionManagement {
             library("koin-core", "io.insert-koin:koin-core:$koinVersion")
             library("koin-android", "io.insert-koin:koin-android:$koinVersion")
             library("koin-compose", "io.insert-koin:koin-androidx-compose:$koinVersion")
+
+
+            library("kermit", "co.touchlab:kermit:2.0.0-RC4")
         }
     }
 }

@@ -4,8 +4,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ConversationDto(
-    val model: String ,
-//    val prompt: String
-
-    val messages: List<MessageDto>
+    val model: String,
+    val messages: List<MessageDto>,
+    val n: Int,
+    val max_tokens: Int
 )

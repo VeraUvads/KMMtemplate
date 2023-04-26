@@ -10,7 +10,7 @@ object Endpoints {
     val DEV: Endpoint =
         EndpointImpl(
             title = "Dev",
-            url = "https://api.openai.com/v1/"
+            url = "https://api.openai.com/"
         )
 
     private data class EndpointImpl(
