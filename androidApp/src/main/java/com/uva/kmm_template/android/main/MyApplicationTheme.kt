@@ -1,4 +1,4 @@
-package com.uva.kmm_template.android
+package com.uva.kmm_template.android.main
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.RoundedCornerShape

@@ -1,4 +1,4 @@
-package com.uva.kmm_template.android
+package com.uva.kmm_template.android.main
 
 import android.app.Application
 import org.koin.android.ext.koin.androidContext

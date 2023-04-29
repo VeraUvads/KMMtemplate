@@ -4,5 +4,5 @@ import com.uva.kmm_template.repository.SampleRepository
 import org.koin.dsl.module
 
 val domainModule = module {
-    single { SampleRepository(sampleDataSource = get()) }
+    single { SampleRepository(remoteDataSource = get()) }
 }

@@ -1,4 +1,4 @@
-package com.uva.kmm_template.android
+package com.uva.kmm_template.android.main
 
 import com.uva.kmm_template.android.home.di.homeModule
 import com.uva.kmm_template.data_source.dataModule

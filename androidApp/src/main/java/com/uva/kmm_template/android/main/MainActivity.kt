@@ -1,4 +1,4 @@
-package com.uva.kmm_template.android
+package com.uva.kmm_template.android.main
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
