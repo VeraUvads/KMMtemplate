@@ -1,19 +1,17 @@
-package com.uva.kmm_template.android.home
+package com.uva.kmm_template.android.detail
 
 import com.uva.kmm_template.android.utils.ViewAction
 import com.uva.kmm_template.android.utils.ViewEvent
 import com.uva.kmm_template.android.utils.ViewState
 
-object HomeComponents {
+object DetailComponents {
 
     data class State(
         val isLoading: Boolean = true,
-        val items: List<String> = listOf(),
+        val data: String = "",
         val isError: Boolean = false
     ) : ViewState()
 
     class Event : ViewEvent()
-    sealed class Action : ViewAction() {
-        data class OnItemClick(val item: String) : Action()
-    }
+    sealed class Action : ViewAction()
 }

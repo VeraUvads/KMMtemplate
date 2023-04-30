@@ -32,7 +32,7 @@ kotlin {
                 implementation(libs.ktor.client.content.negotiation)
                 implementation(libs.ktor.client.serialization)
                 implementation(kotlin("stdlib-common"))
-                implementation(libs.kermit)
+                api(libs.kermit)
                 api(libs.koin.core)
             }
         }
