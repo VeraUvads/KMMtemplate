@@ -1,5 +1,0 @@
-
-
-struct HomeContent: View {
-
-}
