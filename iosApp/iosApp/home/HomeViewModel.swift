@@ -33,7 +33,7 @@ class HomeViewModel: ObservableObject {
             }
         })
     }
-//
+
 //     func onReceiveAction(_ action: HomeComponents.Action) {
 //         switch action
 //         {

@@ -47,7 +47,9 @@ dependencies {
     implementation("androidx.compose.foundation:foundation:$composeVersion")
     implementation("androidx.compose.material:material:$composeVersion")
     implementation("androidx.activity:activity-compose:1.7.0")
-
+    
+    implementation(libs.compose.navigation)
     implementation(libs.koin.android)
     implementation(libs.koin.compose)
+
 }

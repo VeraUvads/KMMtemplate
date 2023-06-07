@@ -46,8 +46,11 @@ dependencyResolutionManagement {
             library("koin-android", "io.insert-koin:koin-android:$koinVersion")
             library("koin-compose", "io.insert-koin:koin-androidx-compose:$koinVersion")
 
-
             library("kermit", "co.touchlab:kermit:2.0.0-RC4")
+
+
+            val composeNavVersion = "2.5.3"
+            library("compose-navigation","androidx.navigation:navigation-compose:$composeNavVersion")
         }
     }
 }
