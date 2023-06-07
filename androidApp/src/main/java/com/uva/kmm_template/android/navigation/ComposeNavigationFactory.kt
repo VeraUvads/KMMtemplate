@@ -10,3 +10,5 @@ interface ComposeNavigationFactory {
 
     fun create(builder: NavGraphBuilder, controller: NavHostController)
 }
+
+interface TopLevelDeclaration : ComposeNavigationFactory

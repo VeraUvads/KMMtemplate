@@ -6,13 +6,13 @@ import androidx.navigation.compose.rememberNavController
 
 @Composable
 fun TopLevelGraph(
-    factories: List<ComposeNavigationFactory> ,
+    factories: List<TopLevelDeclaration>,
     startDestination: String
 ) {
     val topLevelNavController = rememberNavController()
     NavHost(
         navController = topLevelNavController,
-        startDestination = startDestination,
+        startDestination = startDestination
     ) {
         factories.forEach { it.create(this, topLevelNavController) }
     }

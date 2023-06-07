@@ -5,7 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import com.uva.kmm_template.android.home.HomeScreen
 
-class HomeNavFactory : ComposeNavigationFactory {
+class HomeNavFactory : TopLevelDeclaration {
 
     override fun create(builder: NavGraphBuilder, controller: NavHostController) {
         builder.composable("home") {
