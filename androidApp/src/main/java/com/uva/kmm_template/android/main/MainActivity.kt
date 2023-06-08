@@ -6,20 +6,21 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.*
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import com.uva.kmm_template.android.navigation.TopLevelDeclaration
+import co.touchlab.kermit.Logger
+import com.uva.kmm_template.android.navigation.ComposeNavigationFactory
 import com.uva.kmm_template.android.navigation.TopLevelGraph
-import org.koin.androidx.compose.getKoin
+import com.uva.kmm_template.android.utils.injectAll
+import org.koin.core.qualifier.named
 
 class MainActivity : ComponentActivity() {
+    private val factories: List<ComposeNavigationFactory> by injectAll(named("topLevel"))
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val factories = getKoin().getAll<TopLevelDeclaration>()
+            factories.forEach { Logger.e(it.toString()) }
             MyApplicationTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),

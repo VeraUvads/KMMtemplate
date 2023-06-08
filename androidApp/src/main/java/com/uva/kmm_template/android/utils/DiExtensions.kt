@@ -1,14 +1,32 @@
+@file:OptIn(KoinInternalApi::class)
+
 package com.uva.kmm_template.android.utils
 
-import org.koin.core.module.KoinDefinition
-import org.koin.core.module.Module
+import android.content.ComponentCallbacks
+import org.koin.android.ext.android.get
+import org.koin.core.annotation.KoinInternalApi
+import org.koin.core.context.GlobalContext
+import org.koin.core.instance.InstanceContext
 import org.koin.core.qualifier.Qualifier
-import org.koin.dsl.bind
 
-// TODO (?single?); add qualifier
-inline fun <reified T : Any> Module.intoSetSingle(
+inline fun <reified T : Any> ComponentCallbacks.injectAll(
     qualifier: Qualifier? = null,
-    noinline obj: () -> T
-): KoinDefinition<out T> {
-    return single(qualifier) { obj() } bind T::class
+    mode: LazyThreadSafetyMode = LazyThreadSafetyMode.SYNCHRONIZED
+): Lazy<List<T>> {
+    val koin = GlobalContext.get()
+    val scope = koin.scopeRegistry.rootScope
+    val context = InstanceContext(koin, scope)
+    val all = koin.instanceRegistry.instances.values
+        .filter { factory ->
+            factory.beanDefinition.scopeQualifier == context.scope.scopeQualifier &&
+                factory.beanDefinition.qualifier == qualifier
+        }
+        .filter { factory ->
+            factory.beanDefinition.primaryType == T::class || factory.beanDefinition.secondaryTypes.contains(
+                T::class
+            )
+        }
+        .distinct()
+        .map { it.get(context) as T }
+    return lazy(mode) { all }
 }

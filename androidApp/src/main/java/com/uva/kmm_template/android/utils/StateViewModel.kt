@@ -43,7 +43,7 @@ abstract class StateViewModel<State : ViewState, Action : ViewAction, Event : Vi
     /**
      * Для отправки Single Live Event на UI
      */
-    protected fun onEvent(vararg event: Event) {
+    protected fun sendEvent(vararg event: Event) {
         viewModelScope.launch(exceptionHandler) {
             event.forEach { event -> _event.send(event) }
         }
@@ -52,7 +52,7 @@ abstract class StateViewModel<State : ViewState, Action : ViewAction, Event : Vi
     /**
      * Этот метод дергаем со стороны UI если хочеца одно место обработки Action
      */
-    fun onReceiveAction(action: Action) {
+    fun sendAction(action: Action) {
         checkMainThread()
         queueScope.launch(exceptionHandler) { onAction(action) }
     }

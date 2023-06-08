@@ -1,11 +1,9 @@
 package com.uva.kmm_template.android.detail
 
-import androidx.compose.foundation.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import org.koin.androidx.compose.koinViewModel
-import com.uva.kmm_template.android.detail.DetailComponents
 
 @Composable
 fun DetailScreen(viewModel: DetailViewModel = koinViewModel()) {
@@ -13,7 +11,7 @@ fun DetailScreen(viewModel: DetailViewModel = koinViewModel()) {
 
     DetailContent(
         state = state,
-        onAction = viewModel::onReceiveAction
+        onAction = viewModel::sendAction
     )
 }
 

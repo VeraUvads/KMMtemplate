@@ -5,14 +5,16 @@ import com.uva.kmm_template.android.utils.ViewEvent
 import com.uva.kmm_template.android.utils.ViewState
 
 object HomeComponents {
-
     data class State(
         val isLoading: Boolean = true,
         val items: List<String> = listOf(),
         val isError: Boolean = false
     ) : ViewState()
 
-    class Event : ViewEvent()
+    sealed class Event : ViewEvent() {
+        data class NavigateTo(val navigationDestination: String) : Event() // todo builder
+    }
+
     sealed class Action : ViewAction() {
         data class OnItemClick(val item: String) : Action()
     }

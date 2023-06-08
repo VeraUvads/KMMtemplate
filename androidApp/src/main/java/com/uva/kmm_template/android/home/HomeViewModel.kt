@@ -17,6 +17,14 @@ class HomeViewModel(private val sampleRepository: SampleRepository) :
         loadData()
     }
 
+    override fun onAction(action: HomeComponents.Action) {
+        when (action) {
+            is HomeComponents.Action.OnItemClick -> {
+                sendEvent(HomeComponents.Event.NavigateTo("detail")) // todo
+            }
+        }
+    }
+
     private fun loadData() {
         viewModelScope.launch(
             CoroutineExceptionHandler { _, _ ->
@@ -26,6 +34,7 @@ class HomeViewModel(private val sampleRepository: SampleRepository) :
             val items = sampleRepository.getSampleRemote().choices.first().message.content
                 .replace(regex.toRegex(), "")
                 .replace(". ", "")
+                .replace(") ", "")
                 .split("\n")
             reduce { copy(isLoading = false, isError = false, items = items) }
         }
