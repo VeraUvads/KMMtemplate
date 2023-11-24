@@ -20,7 +20,6 @@ import androidx.compose.material.Button
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -29,16 +28,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.uva.kmm_template.android.navigation.DestinationRule
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.uva.kmm_template.android.utils.observeWithLifecycle
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun HomeScreen(
     homeViewModel: HomeViewModel = koinViewModel(),
-    navigateTo: (DestinationRule) -> Unit, // todo builder
+    navigateTo: (String) -> Unit, // todo builder
 ) {
-    val state by homeViewModel.state.collectAsState()
+    val state by homeViewModel.state.collectAsStateWithLifecycle()
 
     HomeContent(
         state = state,
@@ -75,7 +74,7 @@ fun HomeContent(
             )
         } else if (state.isError) {
             Text(
-                text = "Что-то пошло не так",
+                text = "Something went wrong",
                 color = Color.White,
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
@@ -83,6 +82,16 @@ fun HomeContent(
                     .align(Alignment.Center)
                     .padding(24.dp),
             )
+            Button(
+                modifier = Modifier
+                    .align(Alignment.Center)
+                    .padding(24.dp),
+                onClick = {
+                    onAction(HomeComponents.Action.OnItemClick("it"))
+                },
+            ) {
+                Text("Go to next non-working screen")
+            }
         } else {
             Column(
                 modifier = Modifier

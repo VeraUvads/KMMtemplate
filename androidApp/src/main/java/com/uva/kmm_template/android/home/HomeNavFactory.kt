@@ -18,7 +18,7 @@ class HomeNavFactory : ComposeNavigationFactory {
     override fun create(builder: NavGraphBuilder, controller: NavHostController) {
         builder.composable(HomeDestination) {
             HomeScreen() {
-                controller.navigateTo(it)
+                controller.navigate(it)
             }
         }
     }

@@ -16,27 +16,28 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun DetailScreen(viewModel: DetailViewModel = koinViewModel()) {
-    val state by viewModel.state.collectAsState()
+    val state by viewModel.state.collectAsStateWithLifecycle()
 
     DetailContent(
         state = state,
-        onAction = viewModel::sendAction
+        onAction = viewModel::sendAction,
     )
 }
 
 @Composable
 fun DetailContent(
     state: DetailComponents.State,
-    onAction: (DetailComponents.Action) -> Unit
+    onAction: (DetailComponents.Action) -> Unit,
 ) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFF161A23)) // todo theme
+            .background(Color(0xFF161A23)), // todo theme
     ) {
         when {
             state.isError -> {
@@ -47,7 +48,7 @@ fun DetailContent(
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier
                         .align(Alignment.Center)
-                        .padding(24.dp)
+                        .padding(24.dp),
                 )
             }
 
@@ -56,7 +57,7 @@ fun DetailContent(
                     color = Color.White,
                     modifier = Modifier
                         .size(48.dp)
-                        .align(Alignment.Center)
+                        .align(Alignment.Center),
                 )
             }
 

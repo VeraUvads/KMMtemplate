@@ -3,6 +3,7 @@ package com.uva.kmm_template.android.home
 import androidx.lifecycle.viewModelScope
 import com.uva.kmm_template.android.detail.DetailDestination
 import com.uva.kmm_template.android.navigation.DestinationRule
+import com.uva.kmm_template.android.navigation.with
 import com.uva.kmm_template.android.utils.StateViewModel
 import com.uva.kmm_template.repository.SampleRepository
 import kotlinx.coroutines.CoroutineExceptionHandler

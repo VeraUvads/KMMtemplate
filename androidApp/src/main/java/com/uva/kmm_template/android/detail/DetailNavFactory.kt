@@ -16,12 +16,8 @@ object DetailDestination : DestinationRule() {
     override val requireArguments: List<NamedNavArgument> = listOf(
         navArgument("detailedItem") {
             type = NavType.StringType
-        }
+        },
     )
-
-    fun with(detailedItem: String): DestinationRule {
-        return super.with(detailedItem)
-    }
 }
 
 class DetailNavFactory : ComposeNavigationFactory {

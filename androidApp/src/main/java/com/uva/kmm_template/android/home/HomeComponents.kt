@@ -13,7 +13,7 @@ object HomeComponents {
     ) : ViewState()
 
     sealed class Event : ViewEvent() {
-        data class NavigateTo(val destination: DestinationRule) : Event() // todo builder
+        data class NavigateTo(val destination: String) : Event() // todo builder
     }
 
     sealed class Action : ViewAction() {

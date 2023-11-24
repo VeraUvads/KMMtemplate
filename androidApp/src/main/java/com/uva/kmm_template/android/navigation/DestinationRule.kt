@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.os.Parcelable
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavType
-import co.touchlab.kermit.Logger
 import java.io.Serializable
+
 
 abstract class DestinationRule {
 
@@ -19,40 +19,31 @@ abstract class DestinationRule {
             "Screen name cannot start with '/'"
         }
         val args = requireArguments.joinToString(
-            prefix = "/",
-            separator = "/"
+            prefix = "/", separator = "/"
         ) { "{${it.name}}" }
         return "$screenName$args"
     }
 
     protected abstract val screenName: String
 
-    private val arguments: ArrayList<Any> = arrayListOf() // todo think
-
-    protected fun with(vararg any: Any): DestinationRule {
-        arguments.add(any)
-        return this
-    }
-
-    fun computeRouteWithArgs(): String {
-        check(arguments.size >= requireArguments.filterNot { it.argument.isNullable }.size) {
+    fun computeRouteWithArgs(vararg args: Any): String {
+        check(args.size >= requireArguments.filterNot { it.argument.isNullable }.size) {
             "Please check that you pass all not null arguments"
         }
-        check(arguments.size <= requireArguments.size) {
+        check(args.size <= requireArguments.size) {
             "Looks like, you pass extra arguments or forgot add it to requireArguments field"
         }
-        check(arguments.none { it is Parcelable && it is Serializable }) {
+        check(args.none { it is Parcelable && it is Serializable }) {
             "Right now Navigation lib doesn't support Parcelable and Serializable"
         }
-        val argsString = arguments
+        val argsString = args
             .onEachIndexed { index, any ->
                 val navType = navTypeByObject(any)
                 val shouldNavType = requireArguments[index].argument.type
 
-                if (navType == NavTypeAll) Logger.w("We get NavTypeAll from restricted API be careful")
-//                check(navType == shouldNavType || navType == NavTypeAll) {
-//                    "Argument with index $index has wrong type.\nExpect: $shouldNavType\nActual: $navType"
-//                }
+                check(navType == shouldNavType || navType == NavTypeAll) {
+                    "Argument with index $index has wrong type.\nExpect: $shouldNavType\nActual: $navType"
+                }
             }
             .joinToString(separator = "/", prefix = "/")
 
@@ -68,6 +59,23 @@ abstract class DestinationRule {
         }
     }
 }
+
+fun DestinationRule.with(): String {
+    return computeRouteWithArgs()
+}
+
+fun <T1 : Any> DestinationRule.with(arg: T1): String {
+    return computeRouteWithArgs(arg)
+}
+
+fun <T1 : Any, T2 : Any> DestinationRule.with(arg1: T1, arg2: T2): String {
+    return computeRouteWithArgs(arg1, arg2)
+}
+
+fun <T1 : Any, T2 : Any, T3 : Any> DestinationRule.with(arg1: T1, arg2: T2, arg3: T3): String {
+    return computeRouteWithArgs(arg1, arg2, arg3)
+}
+
 
 private val NavTypeAll = object : NavType<Any>(isNullableAllowed = true) {
     override fun get(bundle: Bundle, key: String): Any = error("unsupported")

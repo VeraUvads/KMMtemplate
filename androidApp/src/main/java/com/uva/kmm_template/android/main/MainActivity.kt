@@ -11,6 +11,8 @@ import com.uva.kmm_template.android.home.HomeDestination
 import com.uva.kmm_template.android.navigation.ComposeNavigationFactory
 import com.uva.kmm_template.android.navigation.TopLevelGraph
 import com.uva.kmm_template.android.utils.injectAll
+import org.koin.androidx.compose.KoinAndroidContext
+import org.koin.core.context.KoinContext
 import org.koin.core.qualifier.named
 
 class MainActivity : ComponentActivity() {
@@ -19,16 +21,18 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            factories.forEach { Logger.e(it.toString()) }
-            MyApplicationTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background,
-                ) {
-                    TopLevelGraph(
-                        factories,
-                        HomeDestination.computeRoute(),
-                    )
+            KoinAndroidContext {
+                factories.forEach { Logger.e(it.toString()) }
+                MyApplicationTheme {
+                    Surface(
+                        modifier = Modifier.fillMaxSize(),
+                        color = MaterialTheme.colors.background,
+                    ) {
+                        TopLevelGraph(
+                            factories,
+                            HomeDestination.computeRoute(),
+                        )
+                    }
                 }
             }
         }

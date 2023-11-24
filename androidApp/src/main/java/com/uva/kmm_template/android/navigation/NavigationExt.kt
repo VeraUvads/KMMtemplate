@@ -11,12 +11,12 @@ import kotlin.properties.ReadOnlyProperty
 
 fun NavGraphBuilder.composable(
     destinationRule: DestinationRule,
-    content: @Composable AnimatedContentScope.(NavBackStackEntry) -> Unit,
+    content: @Composable AnimatedContentScope.(NavBackStackEntry) -> Unit
 ) {
     composable(
         route = destinationRule.computeRoute(),
         arguments = destinationRule.requireArguments,
-        content = content,
+        content = content
     )
 }
 
@@ -37,3 +37,4 @@ fun <T> SavedStateHandle.arg(name: String? = null): ReadOnlyProperty<Any, T> {
 fun <T> SavedStateHandle.nullableArg(name: String? = null): ReadOnlyProperty<Any, T?> {
     return ReadOnlyProperty { _, property -> get(name ?: property.name) }
 }
+
