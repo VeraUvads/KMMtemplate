@@ -7,5 +7,6 @@ import kotlinx.coroutines.flow.flow
 
 class SampleRemoteDataSource(private val apiCall: ApiCall) {
     suspend fun getSampleRemote(): ChatCompletionResponse = apiCall.generateTopics()
+    suspend fun askAbout(topic: String): ChatCompletionResponse = apiCall.askAbout(topic)
 
 }

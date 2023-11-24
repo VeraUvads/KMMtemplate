@@ -1,6 +1,8 @@
 package com.uva.kmm_template.android.home
 
 import androidx.lifecycle.viewModelScope
+import com.uva.kmm_template.android.detail.DetailDestination
+import com.uva.kmm_template.android.navigation.DestinationRule
 import com.uva.kmm_template.android.utils.StateViewModel
 import com.uva.kmm_template.repository.SampleRepository
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -20,7 +22,7 @@ class HomeViewModel(private val sampleRepository: SampleRepository) :
     override fun onAction(action: HomeComponents.Action) {
         when (action) {
             is HomeComponents.Action.OnItemClick -> {
-                sendEvent(HomeComponents.Event.NavigateTo("detail")) // todo
+                sendEvent(HomeComponents.Event.NavigateTo(DetailDestination.with(action.item))) // todo
             }
         }
     }

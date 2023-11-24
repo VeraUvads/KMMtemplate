@@ -12,6 +12,8 @@ class SampleRepository() : KoinComponent {
         return remoteDataSource.getSampleRemote()
     }
 
+    suspend fun askAbout(topic: String): ChatCompletionResponse = remoteDataSource.askAbout(topic)
+
     //    suspend fun getSampleLocal(): Flow<Any> {
     //        return sampleDataSource.getSampleLocal()
     //    }

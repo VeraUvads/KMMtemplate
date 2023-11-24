@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Button
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -28,25 +29,26 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.uva.kmm_template.android.navigation.DestinationRule
 import com.uva.kmm_template.android.utils.observeWithLifecycle
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun HomeScreen(
     homeViewModel: HomeViewModel = koinViewModel(),
-    navigateTo: (String) -> Unit // todo builder
+    navigateTo: (DestinationRule) -> Unit, // todo builder
 ) {
     val state by homeViewModel.state.collectAsState()
 
     HomeContent(
         state = state,
-        onAction = homeViewModel::sendAction
+        onAction = homeViewModel::sendAction,
     )
 
     homeViewModel.event.observeWithLifecycle { event ->
         when (event) {
             is HomeComponents.Event.NavigateTo -> {
-                navigateTo(event.navigationDestination)
+                navigateTo(event.destination)
             }
         }
     }
@@ -55,21 +57,21 @@ fun HomeScreen(
 @Composable
 fun HomeContent(
     state: HomeComponents.State,
-    onAction: (HomeComponents.Action) -> Unit
+    onAction: (HomeComponents.Action) -> Unit,
 ) {
     val scrollState = rememberScrollState()
 
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFF161A23))
+            .background(Color(0xFF161A23)),
     ) {
         if (state.isLoading) {
             CircularProgressIndicator(
                 color = Color.White,
                 modifier = Modifier
                     .size(48.dp)
-                    .align(Alignment.Center)
+                    .align(Alignment.Center),
             )
         } else if (state.isError) {
             Text(
@@ -79,14 +81,14 @@ fun HomeContent(
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier
                     .align(Alignment.Center)
-                    .padding(24.dp)
+                    .padding(24.dp),
             )
         } else {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 24.dp, vertical = 36.dp)
-                    .verticalScroll(scrollState)
+                    .verticalScroll(scrollState),
             ) {
                 Text(
                     text = "Выберите тему",
@@ -94,8 +96,13 @@ fun HomeContent(
                     fontSize = 24.sp,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier
-                        .align(Alignment.CenterHorizontally)
+                        .align(Alignment.CenterHorizontally),
                 )
+
+                Button(onClick = {
+                    onAction(HomeComponents.Action.OnItemClick("it"))
+                }) {
+                }
 
                 Spacer(modifier = Modifier.height(24.dp))
                 state.items.forEachIndexed { index, item ->
@@ -125,9 +132,9 @@ fun ListItem(item: String, index: Int, onClick: (String) -> Unit) {
                     Color(0xFF1F1F1F)
                 } else {
                     Color(0xFF242835)
-                }
+                },
             )
-            .padding(16.dp)
+            .padding(16.dp),
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Text(
@@ -135,14 +142,14 @@ fun ListItem(item: String, index: Int, onClick: (String) -> Unit) {
                 color = Color.White,
                 fontWeight = FontWeight.Bold,
                 fontSize = 24.sp,
-                modifier = Modifier.width(32.dp)
+                modifier = Modifier.width(32.dp),
             )
 
             Text(
                 text = item,
                 color = Color.White,
                 fontSize = 20.sp,
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(1f),
             )
         }
     }

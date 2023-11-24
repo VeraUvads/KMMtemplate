@@ -5,11 +5,11 @@ plugins {
 
 android {
     namespace = "com.uva.kmm_template.android"
-    compileSdk = 33
+    compileSdk = 34
     defaultConfig {
         applicationId = "com.uva.kmm_template.android"
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
     }

@@ -5,10 +5,9 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.*
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import co.touchlab.kermit.Logger
+import com.uva.kmm_template.android.home.HomeDestination
 import com.uva.kmm_template.android.navigation.ComposeNavigationFactory
 import com.uva.kmm_template.android.navigation.TopLevelGraph
 import com.uva.kmm_template.android.utils.injectAll
@@ -24,11 +23,11 @@ class MainActivity : ComponentActivity() {
             MyApplicationTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
+                    color = MaterialTheme.colors.background,
                 ) {
                     TopLevelGraph(
                         factories,
-                        "home"
+                        HomeDestination.computeRoute(),
                     )
                 }
             }

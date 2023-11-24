@@ -1,5 +1,6 @@
 package com.uva.kmm_template.android.home
 
+import com.uva.kmm_template.android.navigation.DestinationRule
 import com.uva.kmm_template.android.utils.ViewAction
 import com.uva.kmm_template.android.utils.ViewEvent
 import com.uva.kmm_template.android.utils.ViewState
@@ -12,7 +13,7 @@ object HomeComponents {
     ) : ViewState()
 
     sealed class Event : ViewEvent() {
-        data class NavigateTo(val navigationDestination: String) : Event() // todo builder
+        data class NavigateTo(val destination: DestinationRule) : Event() // todo builder
     }
 
     sealed class Action : ViewAction() {

@@ -25,4 +25,19 @@ class ApiCall(
             setBody(data)
         }.body()
     }
+
+    suspend fun askAbout(topic: String): ChatCompletionResponse {
+        val data = ConversationDto(
+            model = "gpt-3.5-turbo",
+            messages = listOf(
+                MessageDto(role = "user", content = "Что ты думаешь на счет $topic"),
+            ),
+            n = 1,
+            max_tokens = 100
+        )
+
+        return httpClient.post("v1/chat/completions") {
+            setBody(data)
+        }.body()
+    }
 }

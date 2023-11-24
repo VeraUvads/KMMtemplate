@@ -2,12 +2,12 @@ package com.uva.kmm_template.android.utils
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.uva.kmm_template.android.BuildConfig
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
-import org.koin.android.BuildConfig
 import java.util.concurrent.Executors
 import co.touchlab.kermit.Logger as Kermit
 
